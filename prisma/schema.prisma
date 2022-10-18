@@ -18,8 +18,11 @@ model User {
   firstName String?
   lastName  String?
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  Bookmark  Bookmark[]
+
+  @@map("users")
 }
 
 model Bookmark {
@@ -28,6 +31,11 @@ model Bookmark {
   description String?
   ink         String
 
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("bookmarks")
 }
